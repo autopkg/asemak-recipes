@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>This recipe will download the latest version of the Pharos Popup client.</string>
+    <key>identifier</key>
+    <string>com.github.asemak-recipes.download.pharospopup</string>
+    <key>Input</key>
+    <dict>
+      <key>NAME</key>
+      <string>Popup</string>
+    </dict>
+    <key>Process</key>
+    <array>
+      <dict>
+        <key>Arguments</key>
+        <dict>
+          <key>re_pattern</key>
+          <string>Mac\+OS\+X\+Popup\+Client\+([\d\.]+)\.zip</string>
+          <key>result_output_var_name</key>
+          <string>version</string>
+          <key>url</key>
+          <string>https://community.pharos.com/docs/DOC-1650</string>
+        </dict>
+        <key>Processor</key>
+			  <string>URLTextSearcher</string>
+      </dict>
+      <dict>
+			<key>Arguments</key>
+			<dict>
+				<key>url</key>
+				<string>https://www.pharos.com/support/downloads/mac/Mac%20OS%20X%20Popup%20Client%20%version%.zip</string>
+			</dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
+		</dict>
+    <dict>
+      <key>Processor</key>
+      <string>EndOfCheckPhase</string>
+    </dict>
+    <dict>
+			<key>Arguments</key>
+			<dict>
+				<key>archive_path</key>
+				<string>%pathname%</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/%NAME%/unzipped</string>
+				<key>purge_destination</key>
+				<true/>
+			</dict>
+			<key>Processor</key>
+			<string>Unarchiver</string>
+		</dict>
+    <dict>
+      <key>Arguments</key>
+      <dict>
+        <key>source_pkg</key>
+        <string>%RECIPE_CACHE_DIR%/%NAME%/unzipped/%NAME%.dmg/%NAME%.pkg</string>
+      </dict>
+      <key>Processor</key>
+      <string>PkgCopier</string>
+    </dict>
+    <dict>
+    <key>Processor</key>
+    <string>CodeSignatureVerifier</string>
+    <key>Arguments</key>
+    <dict>
+        <key>input_path</key>
+        <string>%RECIPE_CACHE_DIR%/%NAME%/unzipped/%NAME%.dmg/%NAME%.pkg</string>
+        <key>expected_authority_names</key>
+        <array>
+            <string>Developer ID Installer: Pharos Systems International</string>
+            <string>Developer ID Certification Authority</string>
+            <string>Apple Root CA</string>
+        </array>
+    </dict>
+</dict>
+  </array>
+</dict>
+</plist>
