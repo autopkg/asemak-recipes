@@ -5,7 +5,7 @@
     <key>Description</key>
     <string>This recipe will download the latest version of the Pharos Popup client.</string>
     <key>identifier</key>
-    <string>com.github.asemak-recipes.download.pharospopup</string>
+    <string>com.github.asemak.download.popup</string>
     <key>Input</key>
     <dict>
       <key>NAME</key>
