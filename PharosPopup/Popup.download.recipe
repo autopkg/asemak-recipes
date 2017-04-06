@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>This recipe will download the latest version of the Pharos Popup client.</string>
-    <key>identifier</key>
+    <string>Downloads the latest version of the Pharos Popup client.</string>
+    <key>Identifier</key>
     <string>com.github.asemak.download.popup</string>
     <key>Input</key>
     <dict>
@@ -45,7 +45,7 @@
 				<key>archive_path</key>
 				<string>%pathname%</string>
 				<key>destination_path</key>
-				<string>%RECIPE_CACHE_DIR%/%NAME%/unzipped</string>
+				<string>%RECIPE_CACHE_DIR%/unzipped</string>
 				<key>purge_destination</key>
 				<true/>
 			</dict>
@@ -58,7 +58,7 @@
         <key>Arguments</key>
         <dict>
             <key>input_path</key>
-            <string>%RECIPE_CACHE_DIR%/%NAME%/unzipped/%NAME%.dmg/%NAME%.pkg</string>
+            <string>%RECIPE_CACHE_DIR%/unzipped/%NAME%.dmg/%NAME%.pkg</string>
             <key>expected_authority_names</key>
             <array>
                 <string>Developer ID Installer: Pharos Systems International</string>
