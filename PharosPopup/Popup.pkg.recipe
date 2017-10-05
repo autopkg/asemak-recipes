@@ -22,7 +22,7 @@ within, appending the version number to the filename.</string>
             <key>Arguments</key>
             <dict>
 				        <key>source_pkg</key>
-                <string>%RECIPE_CACHE_DIR%/unzipped/%NAME%.dmg/%NAME%.pkg</string>
+                <string>%RECIPE_CACHE_DIR%/unzipped/Mac OS X Popups %version%/%NAME%.dmg/%NAME%.pkg</string>
                 <key>pkg_path</key>
                 <string>%RECIPE_CACHE_DIR%/Popup-%version%.pkg</string>
             </dict>
