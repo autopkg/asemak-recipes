@@ -36,7 +36,7 @@
                 <key>url</key>
                 <string>https://troikatronix.com/files/isadoramac-%version%-std.dmg</string>
                 <key>filename</key>
-                <string>%NAME%.dmg</string>
+                <string>%NAME%_%version%.dmg</string>
             </dict>
         </dict>
         <dict>
