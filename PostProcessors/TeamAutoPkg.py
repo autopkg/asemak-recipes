@@ -61,11 +61,7 @@ class TeamAutoPkg(Processor):
         was_imported = self.env.get("munki_repo_changed")
         munkiInfo = self.env.get("munki_info")
         webhook_url = self.env.get("webhook_url")
-
-        # These would be nice but Teams is sh...not great. Custom Settings
-        # ICONEMOJI = ":ghost:"
-        # AUTOPKGICON = "https://avatars0.githubusercontent.com/u/5170557?s=200&v=4"
-        # USERNAME = "AutoPKG"
+        
 
         if was_imported:
             name = self.env.get("munki_importer_summary_result")[
@@ -83,9 +79,6 @@ class TeamAutoPkg(Processor):
                     name, version, catalog, pkg_path, pkginfo_path)
                 teams_data = {
                     'text': teams_text,
-                    # 'channel': CHANNEL,
-                    # 'icon_url': AUTOPKGICON,
-                    #'username': USERNAME}
 
                 response = requests.post(
                     webhook_url, json=teams_data)
