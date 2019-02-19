@@ -78,7 +78,7 @@ class TeamAutoPkg(Processor):
                 teams_text = "*New item added to repo:*\nTitle: *%s*\nVersion: *%s*\nCatalog: *%s\n*Pkg Path: *%s*\nPkginfo Path: *%s*" % (
                     name, version, catalog, pkg_path, pkginfo_path)
                 teams_data = {
-                    'text': teams_text,
+                    'text': teams_text }
 
                 response = requests.post(webhook_url, json=teams_data)
                 if response.status_code != 200:
