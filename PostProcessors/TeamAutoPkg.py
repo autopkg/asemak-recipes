@@ -21,7 +21,7 @@ import os.path
 import json
 import requests
 
-# Set the webhook_url to the one provided by Temas hen you create the webhook
+# Set the webhook_url to the one provided by Teams then you create the webhook
 
 __all__ = ["TeamAutoPkg"]
 
