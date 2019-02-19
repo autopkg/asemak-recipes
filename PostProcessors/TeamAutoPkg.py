@@ -80,8 +80,7 @@ class TeamAutoPkg(Processor):
                 teams_data = {
                     'text': teams_text,
 
-                response = requests.post(
-                    webhook_url, json=teams_data)
+                response = requests.post(webhook_url, json=teams_data)
                 if response.status_code != 200:
                     raise ValueError(
                         'Request to Teams returned an error %s, the response is:\n%s' %
