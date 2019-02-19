@@ -83,9 +83,9 @@ class TeamAutoPkg(Processor):
                     name, version, catalog, pkg_path, pkginfo_path)
                 teams_data = {
                     'text': teams_text,
-                    'channel': CHANNEL,
-                    'icon_url': AUTOPKGICON,
-                    'username': USERNAME}
+                    # 'channel': CHANNEL,
+                    # 'icon_url': AUTOPKGICON,
+                    #'username': USERNAME}
 
                 response = requests.post(
                     webhook_url, json=teams_data)
