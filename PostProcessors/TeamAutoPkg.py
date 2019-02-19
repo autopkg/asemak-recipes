@@ -25,15 +25,18 @@ import requests
 
 __all__ = ["TeamAutoPkg"]
 
+
 class TeamAutoPkg(Processor):
-    description = ("Posts to Teams via webhook based on output of a MunkiImporter. "
-                    "Teams alternative to the post processor provided by Ben Reilly (@notverypc)"
-                    "Based on Graham Pugh's slacker.py - https://github.com/grahampugh/recipes/blob/master/PostProcessors/slacker.py"
-                    "and "
-                    "@thehill idea on macadmin slack - https://macadmins.slack.com/archives/CBF6D0B97/p1542379199001400"
-                    "Takes elements from " "https://gist.github.com/devStepsize/b1b795309a217d24566dcc0ad136f784"
-                    "and "
-                    "https://github.com/autopkg/nmcspadden-recipes/blob/master/PostProcessors/Yo.py")
+    description = (
+        "Posts to Teams via webhook based on output of a MunkiImporter. "
+        "Teams alternative to the post processor provided by Ben Reilly (@notverypc)"
+        "Based on Graham Pugh's slacker.py - https://github.com/grahampugh/recipes/blob/master/PostProcessors/slacker.py"
+        "and "
+        "@thehill idea on macadmin slack - https://macadmins.slack.com/archives/CBF6D0B97/p1542379199001400"
+        "Takes elements from "
+        "https://gist.github.com/devStepsize/b1b795309a217d24566dcc0ad136f784"
+        "and "
+        "https://github.com/autopkg/nmcspadden-recipes/blob/master/PostProcessors/Yo.py")
 
     input_variables = {
         "munki_info": {
@@ -65,22 +68,31 @@ class TeamAutoPkg(Processor):
         # USERNAME = "AutoPKG"
 
         if was_imported:
-            name = self.env.get("munki_importer_summary_result")["data"]["name"]
-            version = self.env.get("munki_importer_summary_result")["data"]["version"]
-            pkg_path = self.env.get("munki_importer_summary_result")["data"]["pkg_repo_path"]
-            pkginfo_path = self.env.get("munki_importer_summary_result")["data"]["pkginfo_path"]
-            catalog = self.env.get("munki_importer_summary_result")["data"]["catalogs"]
+            name = self.env.get("munki_importer_summary_result")[
+                "data"]["name"]
+            version = self.env.get("munki_importer_summary_result")[
+                "data"]["version"]
+            pkg_path = self.env.get("munki_importer_summary_result")[
+                "data"]["pkg_repo_path"]
+            pkginfo_path = self.env.get("munki_importer_summary_result")[
+                "data"]["pkginfo_path"]
+            catalog = self.env.get("munki_importer_summary_result")[
+                "data"]["catalogs"]
             if name:
-                teams_text = "*New item added to repo:*\nTitle: *%s*\nVersion: *%s*\nCatalog: *%s\n*Pkg Path: *%s*\nPkginfo Path: *%s*" % (name, version, catalog, pkg_path, pkginfo_path)
-                teams_data = {'text': teams_text, 'channel': CHANNEL, 'icon_url': AUTOPKGICON, 'username': USERNAME}
+                teams_text = "*New item added to repo:*\nTitle: *%s*\nVersion: *%s*\nCatalog: *%s\n*Pkg Path: *%s*\nPkginfo Path: *%s*" % (
+                    name, version, catalog, pkg_path, pkginfo_path)
+                teams_data = {
+                    'text': teams_text,
+                    'channel': CHANNEL,
+                    'icon_url': AUTOPKGICON,
+                    'username': USERNAME}
 
                 response = requests.post(
-                webhook_url, json=teams_data)
+                    webhook_url, json=teams_data)
                 if response.status_code != 200:
                     raise ValueError(
-                                'Request to Teams returned an error %s, the response is:\n%s'
-                                % (response.status_code, response.text)
-                                )
+                        'Request to Teams returned an error %s, the response is:\n%s' %
+                        (response.status_code, response.text))
 
 
 if __name__ == "__main__":
