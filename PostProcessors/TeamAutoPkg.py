@@ -15,12 +15,10 @@
 # limitations under the License.
 
 from __future__ import absolute_import
-from autopkglib import Processor, ProcessorError
 
-import subprocess
-import os.path
-import json
 import requests
+
+from autopkglib import Processor, ProcessorError
 
 # Set the webhook_url to the one provided by Teams then you create the webhook
 
@@ -62,7 +60,7 @@ class TeamAutoPkg(Processor):
         was_imported = self.env.get("munki_repo_changed")
         munkiInfo = self.env.get("munki_info")
         webhook_url = self.env.get("webhook_url")
-        
+
 
         if was_imported:
             name = self.env.get("munki_importer_summary_result")[
