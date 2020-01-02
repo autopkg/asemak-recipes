@@ -12,7 +12,7 @@ within, appending the version number to the filename.</string>
       		<key>NAME</key>
 		<string>Popup</string>
 		<key>DOWNLOAD_PREFIX</key>
-		</string>Mac OS X Popups</string>
+		<string>Mac OS X Popups</string>
         	<key>PKG_ID</key>
         	<string>com.pharos.pkg.popup</string>
       	</dict>
