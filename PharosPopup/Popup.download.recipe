@@ -2,44 +2,52 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Description</key>
-    <string>Downloads the latest version of the Pharos Popup client.</string>
-    <key>Identifier</key>
-    <string>com.github.asemak.download.popup</string>
-    <key>Input</key>
-    <dict>
-      <key>NAME</key>
-      <string>Popup</string>
-    </dict>
-    <key>Process</key>
-    <array>
-      <dict>
-        <key>Arguments</key>
-        <dict>
-          <key>re_pattern</key>
-          <string>Mac\+OS\+X\+Popups\+([\d\.]+)\.zip</string>
-          <key>result_output_var_name</key>
-          <string>version</string>
-          <key>url</key>
-          <string>https://community.pharos.com/docs/DOC-1650</string>
-        </dict>
-        <key>Processor</key>
-			  <string>URLTextSearcher</string>
-      </dict>
-      <dict>
+	<key>Description</key>
+	<string>Downloads the latest version of the Pharos Popup client.</string>
+	<key>Identifier</key>
+	<string>com.github.asemak.download.popup</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>Popup</string>
+		<key>SEARCH_URL</key>
+		<string>https://pharos.com/uniprint/mac-updates/</string>
+		<key>DOWNLOAD_URL</key>
+		<string>https://pharos.com/support/downloads/mac</string>
+		<key>DOWNLOAD_PREFIX</key>
+		<string>Mac OS X Popups</string>
+    	</dict>
+    	<key>Process</key>
+	<array>
+		<dict>
+			<key>Processor</key>
+			<string>URLTextSearcher</string>
+			<key>Arguments</key>
+        		<dict>
+          			<key>re_pattern</key>
+          			<string>%DOWNLOAD_PREFIX% ([0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}).zip</string>
+          			<key>result_output_var_name</key>
+          			<string>version</string>
+          			<key>url</key>
+          			<string>%SEARCH_URL%</string>
+        		</dict>
+      		</dict>
+      		<dict>
+			<key>Processor</key>
+			<string>URLDownloader</string>
 			<key>Arguments</key>
 			<dict>
 				<key>url</key>
-				<string>https://www.pharos.com/support/downloads/mac/Mac%20OS%20X%20Popups%20%version%.zip</string>
+				<string>%DOWNLOAD_URL%/%DOWNLOAD_PREFIX% %version%.zip</string>
 			</dict>
-			<key>Processor</key>
-			<string>URLDownloader</string>
 		</dict>
-    <dict>
-      <key>Processor</key>
-      <string>EndOfCheckPhase</string>
-    </dict>
-    <dict>
+    		<dict>
+      			<key>Processor</key>
+      			<string>EndOfCheckPhase</string>
+    		</dict>
+    		<dict>
+			<key>Processor</key>
+			<string>Unarchiver</string>
 			<key>Arguments</key>
 			<dict>
 				<key>archive_path</key>
@@ -49,24 +57,22 @@
 				<key>purge_destination</key>
 				<true/>
 			</dict>
-			<key>Processor</key>
-			<string>Unarchiver</string>
 		</dict>
-    <dict>
-        <key>Processor</key>
-        <string>CodeSignatureVerifier</string>
-        <key>Arguments</key>
-        <dict>
-            <key>input_path</key>
-            <string>%RECIPE_CACHE_DIR%/unzipped/Mac OS X Popups %version%/%NAME%.dmg/%NAME%.pkg</string>
-            <key>expected_authority_names</key>
-            <array>
-                <string>Developer ID Installer: Pharos Systems International (QMY9322U6D)</string>
-                <string>Developer ID Certification Authority</string>
-                <string>Apple Root CA</string>
-            </array>
-        </dict>
-      </dict>
-</array>
+    		<dict>
+        		<key>Processor</key>
+        		<string>CodeSignatureVerifier</string>
+        		<key>Arguments</key>
+        		<dict>
+            			<key>input_path</key>
+            			<string>%RECIPE_CACHE_DIR%/unzipped/%DOWNLOAD_PREFIX% %version%/%NAME%.dmg/%NAME%.pkg</string>
+            			<key>expected_authority_names</key>
+            			<array>
+                			<string>Developer ID Installer: Pharos Systems International (QMY9322U6D)</string>
+                			<string>Developer ID Certification Authority</string>
+                			<string>Apple Root CA</string>
+            			</array>
+        		</dict>
+      		</dict>
+	</array>
 </dict>
 </plist>
