@@ -74,7 +74,7 @@ class TeamsPost(Processor):
             catalog = self.env.get("munki_importer_summary_result")[
                 "data"]["catalogs"]
             if name:
-                teams_text = "*New item added to repo:*\nTitle: *%s*\nVersion: *%s*\nCatalog: *%s\n*Pkg Path: *%s*\nPkginfo Path: *%s*" % (
+                teams_text = "*New item added to repo:*\nTitle: *%s*\nVersion: *%s*\nCatalog: *%s*\nPkg Path: *%s*\nPkginfo Path: *%s*" % (
                     name, version, catalog, pkg_path, pkginfo_path)
                 teams_data = {'text': teams_text}
 
