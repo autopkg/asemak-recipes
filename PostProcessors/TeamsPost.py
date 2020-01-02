@@ -22,10 +22,10 @@ from autopkglib import Processor, ProcessorError
 
 # Set the webhook_url to the one provided by Teams then you create the webhook
 
-__all__ = ["TeamAutoPkg"]
+__all__ = ["TeamsPost"]
 
 
-class TeamAutoPkg(Processor):
+class TeamsPost(Processor):
     description = (
         "Posts to Teams via webhook based on output of a MunkiImporter. "
         "Teams alternative to the post processor provided by Ben Reilly (@notverypc)"
@@ -86,5 +86,5 @@ class TeamAutoPkg(Processor):
 
 
 if __name__ == "__main__":
-    processor = TeamAutoPkg()
+    processor = TeamsPost()
     processor.execute_shell()
