@@ -2,33 +2,35 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Description</key>
-    <string>Downloads the latest Pharos Popup client and copies out the flat installer pkg
+	<key>Description</key>
+	<string>Downloads the latest Pharos Popup client and copies out the flat installer pkg
 within, appending the version number to the filename.</string>
-    <key>Identifier</key>
-      <string>com.github.asemak.pkg.popup</string>
-    <key>Input</key>
-      <dict>
-        <key>NAME</key>
-        <string>Popup</string>
-        <key>PKG_ID</key>
-        <string>com.pharos.pkg.popup</string>
-      </dict>
-     <key>ParentRecipe</key>
-     <string>com.github.asemak.download.popup</string>
-     <key>Process</key>
-     <array>
-         <dict>
-            <key>Arguments</key>
-            <dict>
-				        <key>source_pkg</key>
-                <string>%RECIPE_CACHE_DIR%/unzipped/Mac OS X Popups %version%/%NAME%.dmg/%NAME%.pkg</string>
-                <key>pkg_path</key>
-                <string>%RECIPE_CACHE_DIR%/Popup-%version%.pkg</string>
-            </dict>
-            <key>Processor</key>
-            <string>PkgCopier</string>
-        </dict>
+ 	<key>Identifier</key>
+	<string>com.github.asemak.pkg.popup</string>
+	<key>Input</key>
+ 	<dict>
+      		<key>NAME</key>
+		<string>Popup</string>
+		<key>DOWNLOAD_PREFIX</key>
+		</string>Mac OS X Popups</string>
+        	<key>PKG_ID</key>
+        	<string>com.pharos.pkg.popup</string>
+      	</dict>
+     	<key>ParentRecipe</key>
+     	<string>com.github.asemak.download.popup</string>
+     	<key>Process</key>
+    	<array>
+        	<dict>
+            		<key>Arguments</key>
+            		<dict>
+				<key>source_pkg</key>
+                		<string>%RECIPE_CACHE_DIR%/unzipped/%DOWNLOAD_PREFIX% %version%/%NAME%.dmg/%NAME%.pkg</string>
+                		<key>pkg_path</key>
+                		<string>%RECIPE_CACHE_DIR%/Popup-%version%.pkg</string>
+            		</dict>
+            		<key>Processor</key>
+            		<string>PkgCopier</string>
+        	</dict>
       </array>
 </dict>
 </plist>
