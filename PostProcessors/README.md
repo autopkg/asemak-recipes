@@ -6,10 +6,10 @@ First you need to create a webhook in Teams: https://docs.microsoft.com/en-us/mi
 
 This will give you the webhook url, make sure you save this as you will need it next.
 
-Add my repo:
+Add this repo:
 ``` autopkg repo-add asemak-recipes ```
 
-Then run a recipe or recipes:
+Then run a recipe or recipes, replacing the webhook_url with one you saved earlier:
 ``` autopkg run myRecipe.munki MakeCatalogs.munki --post=com.github.autopkg.asemak-recipes.postprocessors/TeamsPost --key webhook_url=https://outlook.office.com/webhook/XXXXXXXXXXX```
 
 Or run using a recipe list:
