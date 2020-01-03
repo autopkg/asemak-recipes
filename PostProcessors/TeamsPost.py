@@ -20,7 +20,7 @@ import requests
 
 from autopkglib import Processor, ProcessorError
 
-# Set the webhook_url to the one provided by Teams then you create the webhook
+# Set the webhook_url to the one provided by Teams when you create the webhook
 
 __all__ = ["TeamsPost"]
 
