@@ -16,6 +16,7 @@
 
 from __future__ import absolute_import
 
+import random
 import requests
 
 from autopkglib import Processor, ProcessorError
@@ -28,14 +29,17 @@ __all__ = ["TeamsPost"]
 class TeamsPost(Processor):
     description = (
         "Posts to Teams via webhook based on output of a MunkiImporter. "
-        "Teams alternative to the post processor provided by Ben Reilly (@notverypc)"
-        "Based on Graham Pugh's slacker.py - https://github.com/grahampugh/recipes/blob/master/PostProcessors/slacker.py"
+        "Teams alternative to the post processor provided by Ben Reilly "
+        "(@notverypc) "
+        "Based on Graham Pugh's slacker.py - "
+        "https://github.com/grahampugh/recipes/blob/master/PostProcessors/slacker.py"  # noqa
         "and "
-        "@thehill idea on macadmin slack - https://macadmins.slack.com/archives/CBF6D0B97/p1542379199001400"
+        "@thehill idea on macadmin slack - "
+        "https://macadmins.slack.com/archives/CBF6D0B97/p1542379199001400 "
         "Takes elements from "
         "https://gist.github.com/devStepsize/b1b795309a217d24566dcc0ad136f784"
         "and "
-        "https://github.com/autopkg/nmcspadden-recipes/blob/master/PostProcessors/Yo.py")
+        "https://github.com/autopkg/nmcspadden-recipes/blob/master/PostProcessors/Yo.py")  # noqa
 
     input_variables = {
         "munki_info": {
@@ -60,7 +64,13 @@ class TeamsPost(Processor):
         was_imported = self.env.get("munki_repo_changed")
         munkiInfo = self.env.get("munki_info")
         webhook_url = self.env.get("webhook_url")
-
+        emojiList = ['&#x1F44A;', '&#x1F44C;', '&#x1F44D;', '&#x1F44F;',
+                     '&#x1F596;', '&#x1F590;', '&#x1F64C;', '&#x1F44B;',
+                     '&#x1F4AA;', '&#x1F525;', '&#x1F386;', '&#x1F9E8;',
+                     '&#x1F389;', '&#x1F381;', '&#x1F3C6;', '&#x1F91A;',
+                     '&#x270B;', '&#x270C;', '&#x1F91F;', '&#x1F918;',
+                     '&#x1F919;', '&#x270A;']
+        emoji = random.choice(emojiList)
 
         if was_imported:
             name = self.env.get("munki_importer_summary_result")[
@@ -74,15 +84,18 @@ class TeamsPost(Processor):
             catalog = self.env.get("munki_importer_summary_result")[
                 "data"]["catalogs"]
             if name:
-                teams_text = "**New item added to repo:**.   \nTitle: **%s**.  \nVersion: **%s**.  \nCatalog: **%s**.  \nPkg Path: **%s**.  \nPkginfo Path: **%s**" % (
-                    name, version, catalog, pkg_path, pkginfo_path)
-                teams_data = {'text': teams_text}
+                teams_text = "**New item added to repo:**   \nTitle: **%s**\
+                             \nVersion: **%s**  \nCatalog: **%s**  \nPkg Path:\
+                             **%s**  \nPkginfo Path: **%s**" % (
+                             name, version, catalog, pkg_path,
+                             pkginfo_path)
+                teams_data = {'text': teams_text, 'textformat': "markdown",
+                              'title': "%s" % (emoji)}
 
                 response = requests.post(webhook_url, json=teams_data)
                 if response.status_code != 200:
-                    raise ValueError(
-                        'Request to Teams returned an error %s, the response is:\n%s' %
-                        (response.status_code, response.text))
+                    raise ValueError('Request to Teams returned an error %s, the response is:\n%s' %  # noqa
+                                    (response.status_code, response.text))
 
 
 if __name__ == "__main__":
