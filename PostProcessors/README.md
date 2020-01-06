@@ -2,6 +2,8 @@
 
 #### An autopkg post-processor which sends a Microsoft Teams notification using a webhook, when an item is added to Munki
 
+A screenshot example can be found in this repo
+
 First you need to create a webhook in Teams: https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#add-an-incoming-webhook-to-a-teams-channel
 
 This will give you the webhook url, make sure you save this as you will need it next.
