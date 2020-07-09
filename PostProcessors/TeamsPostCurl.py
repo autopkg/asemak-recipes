@@ -87,14 +87,13 @@ class TeamsPostCurl(Processor):
 
             # Build the headers
             headers = {
-              "accept": "application/json",
-              "Content-Type": "application/x-www-form-urlencoded"
+              "Content-Type": "Content-Type: application/json"
             }
 
             # Build the required curl switches
             curl_opts = [
                 "--url", self.env.get("webhook_url"),
-                "--request", "POST",
+                # "--request", "POST",
                 "--data", {'text': teams_text, 'textformat': "markdown", 'title': "%s" % (emoji)}  # noqa
             ]
 
@@ -106,7 +105,7 @@ class TeamsPostCurl(Processor):
                 response_token = self.download_with_curl(curl_cmd)
 
             except:
-                raise ProcessorError("Failed to acquire bearer authentication token!")  # noqa
+                raise ProcessorError("Failed to complete the post")  # noqa
 
 if __name__ == "__main__":
     processor = TeamsPostCurl()
