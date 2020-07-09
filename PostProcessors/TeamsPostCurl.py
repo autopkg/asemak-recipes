@@ -23,7 +23,7 @@ from autopkglib import Processor, ProcessorError, URLGetter
 __all__ = ["TeamsPostCurl"]
 
 
-class TeamsPostCurl(Processor):
+class TeamsPostCurl(URLGetter):
     description = (
         "Posts to Teams via webhook based on output of a MunkiImporter. "
         "Teams alternative to the post processor provided by Ben Reilly "
