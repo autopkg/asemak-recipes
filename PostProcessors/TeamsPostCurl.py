@@ -87,6 +87,7 @@ class TeamsPostCurl(Processor):
 
             # Build the headers
             headers = {
+              "accept": "application/json",
               "Content-Type": "Content-Type: application/json"
             }
             print(headers)
@@ -105,7 +106,7 @@ class TeamsPostCurl(Processor):
                 curl_cmd = self.prepare_curl_cmd()
                 self.add_curl_headers(curl_cmd, headers)
                 curl_cmd.extend(curl_opts)
-                response_token = self.download_with_curl(curl_cmd)
+                response_token = self.execute_curl(curl_cmd)
 
             except:
                 raise ProcessorError("Failed to complete the post")  # noqa
