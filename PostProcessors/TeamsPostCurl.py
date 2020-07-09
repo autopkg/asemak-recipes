@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#
+
 # Copyright 2020 Andy Semak
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -82,7 +82,7 @@ class TeamsPostCurl(Processor):
                              pkginfo_path)
                 teams_data = {'text': teams_text, 'textformat': "markdown",
                               'title': "%s" % (emoji)}
-            
+
             # Build the headers
             headers = {
               "accept": "application/json",
@@ -93,18 +93,19 @@ class TeamsPostCurl(Processor):
             curl_opts = [
                 "--url", self.env.get("webhook_url"),
                 "--request", "POST",
-                "--data", {'text': teams_text, 'textformat': "markdown", 'title': "%s" % (emoji)}
+                "--data", {'text': teams_text, 'textformat': "markdown", 'title': "%s" % (emoji)}  # noqa
 
             try:
-              # Initialize the curl_cmd, add the curl options, and execute the curl
+              # Initialize the curl_cmd, add the curl options, and execute the curl  # noqa
               curl_cmd = self.prepare_curl_cmd()
               self.add_curl_headers(curl_cmd, headers)
               curl_cmd.extend(curl_opts)
               # response_token = self.download_with_curl(curl_cmd)
 
             except:
-                raise ProcessorError("Failed to acquire bearer authentication token!")
+                raise ProcessorError("Failed to acquire bearer authentication token!")  # noqa
 
 if __name__ == "__main__":
     processor = TeamsPostCurl()
     processor.execute_shell()
+
