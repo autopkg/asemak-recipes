@@ -78,9 +78,8 @@ class TeamsPostCurl(URLGetter):
                              **%s**  \nPkginfo Path: **%s**" % (
                              name, version, catalog, pkg_path,
                              pkginfo_path)
-                teams_data = {'text': teams_text, 'textformat': "markdown",
-                              'title': "%s" % (emoji)}
-                test = "Hi"
+                teams_data = {"text": {}, "textformat': "markdown",
+                              "title": "%s" % (emoji)}.format(teams_text)
 
             # Build the headers
             headers = {
@@ -91,7 +90,7 @@ class TeamsPostCurl(URLGetter):
             # Build the required curl switches
             curl_opts = [
                 # "--request", "POST",
-                "--data", '{"text": "Did it work2?"}',  # noqa
+                "--data", teams_data.,  # noqa
                 "{}".format(self.env.get("webhook_url"))
             ]
             
