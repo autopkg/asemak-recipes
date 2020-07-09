@@ -14,8 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import json
-
 from autopkglib import Processor, ProcessorError, URLGetter
 
 # Set the webhook_url to the one provided by Teams when you create the webhook
@@ -82,6 +80,7 @@ class TeamsPostCurl(URLGetter):
                              pkginfo_path)
                 teams_data = {'text': teams_text, 'textformat': "markdown",
                               'title': "%s" % (emoji)}
+                test = "Hi"
 
             # Build the headers
             headers = {
@@ -92,8 +91,8 @@ class TeamsPostCurl(URLGetter):
             # Build the required curl switches
             curl_opts = [
                 # "--request", "POST",
-                "--data", teams_data,  # noqa
-                self.env.get("webhook_url")
+                "--data", '{"text": "Did it work2?"}',  # noqa
+                "{}".format(self.env.get("webhook_url"))
             ]
             
             print ("Curl options are:", curl_opts)
@@ -105,7 +104,7 @@ class TeamsPostCurl(URLGetter):
             curl_cmd.extend(curl_opts)
             print ("Curl command is:", curl_cmd)
             try:
-                response = self.execute_curl(curl_cmd, text=False)
+                response = self.execute_curl(curl_cmd)
 
             except:
                 raise ProcessorError("Failed to complete the post")  # noqa
