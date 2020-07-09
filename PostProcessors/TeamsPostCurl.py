@@ -98,11 +98,11 @@ class TeamsPostCurl(Processor):
                 "--data", {'text': teams_text, 'textformat': "markdown", 'title': "%s" % (emoji)}  # noqa
 
             try:
-              # Initialize the curl_cmd, add the curl options, and execute the curl  # noqa
-              curl_cmd = self.prepare_curl_cmd()
-              self.add_curl_headers(curl_cmd, headers)
-              curl_cmd.extend(curl_opts)
-              # response_token = self.download_with_curl(curl_cmd)
+                # Initialize the curl_cmd, add the curl options, and execute the curl  # noqa
+                curl_cmd = self.prepare_curl_cmd()
+                self.add_curl_headers(curl_cmd, headers)
+                curl_cmd.extend(curl_opts)
+                # response_token = self.download_with_curl(curl_cmd)
 
             except:
                 raise ProcessorError("Failed to acquire bearer authentication token!")  # noqa
