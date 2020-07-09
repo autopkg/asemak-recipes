@@ -1,5 +1,5 @@
-#!/usr/bin/python
-
+#!/usr/local/autopkg/python
+#
 # Copyright 2020 Andy Semak
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +16,7 @@
 
 import json
 
-
+from autopkglib import Processor, ProcessorError, URLGetter
 
 # Set the webhook_url to the one provided by Teams when you create the webhook
 
