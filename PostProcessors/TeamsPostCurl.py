@@ -95,7 +95,7 @@ class TeamsPostCurl(Processor):
             # Build the required curl switches
             curl_opts = [
                 "--url", self.env.get("webhook_url"),
-                # "--request", "POST",
+                "--request", "POST",
                 "--data", {'text': teams_text, 'textformat': "markdown", 'title': "%s" % (emoji)}  # noqa
             ]
             
