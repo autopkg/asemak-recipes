@@ -78,7 +78,7 @@ class TeamsPostCurl(URLGetter):
                              **%s**  \nPkginfo Path: **%s**" % (
                              name, version, catalog, pkg_path,
                              pkginfo_path)
-                teams_data = {"text": {}, "textformat': "markdown",
+                teams_data = {"text": {}, "textformat": "markdown",
                               "title": "%s" % (emoji)}.format(teams_text)
 
             # Build the headers
