@@ -85,15 +85,14 @@ class TeamsPostCurl(Processor):
 
             # Build the headers
             headers = {
-              "accept": "application/json",
-              "Content-Type": "Content-Type: application/json"
+              "Content-Type": "application/json"
             }
             print ("Headers are:", headers)
 
             # Build the required curl switches
             curl_opts = [
                 "--url", self.env.get("webhook_url"),
-                "--request", "POST",
+                # "--request", "POST",
                 "--data", {'text': teams_text, 'textformat': "markdown", 'title': "%s" % (emoji)}  # noqa
             ]
             
@@ -106,7 +105,7 @@ class TeamsPostCurl(Processor):
             curl_cmd.extend(curl_opts)
             print ("Curl command is:", curl_cmd)
             try:
-                response_token = self.execute_curl(curl_cmd)
+                response = self.execute_curl(curl_cmd, text=False)
 
             except:
                 raise ProcessorError("Failed to complete the post")  # noqa
