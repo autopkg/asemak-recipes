@@ -89,7 +89,7 @@ class TeamsPostCurl(Processor):
             headers = {
               "Content-Type": "Content-Type: application/json"
             }
-            print headers
+            print(headers)
 
             # Build the required curl switches
             curl_opts = [
@@ -98,7 +98,7 @@ class TeamsPostCurl(Processor):
                 "--data", {'text': teams_text, 'textformat': "markdown", 'title': "%s" % (emoji)}  # noqa
             ]
             
-            print curl_opts
+            print(curl_opts)
             
             try:
                 # Initialize the curl_cmd, add the curl options, and execute the curl  # noqa
