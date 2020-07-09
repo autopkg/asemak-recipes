@@ -88,7 +88,7 @@ class TeamsPostCurl(Processor):
               "accept": "application/json",
               "Content-Type": "Content-Type: application/json"
             }
-            print(headers)
+            print "Headers are:", headers
 
             # Build the required curl switches
             curl_opts = [
@@ -97,13 +97,14 @@ class TeamsPostCurl(Processor):
                 "--data", {'text': teams_text, 'textformat': "markdown", 'title': "%s" % (emoji)}  # noqa
             ]
             
-            print(curl_opts)
+            print "Curl options are:", curl_opts)
             
             try:
                 # Initialize the curl_cmd, add the curl options, and execute the curl  # noqa
                 curl_cmd = self.prepare_curl_cmd()
                 self.add_curl_headers(curl_cmd, headers)
                 curl_cmd.extend(curl_opts)
+                print "Curl command is:", curl_cmd
                 response_token = self.execute_curl(curl_cmd)
 
             except:
