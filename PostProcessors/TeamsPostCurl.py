@@ -16,6 +16,8 @@
 
 from __future__ import absolute_import
 
+import json
+
 from autopkglib import Processor, ProcessorError, URLGetter
 
 # Set the webhook_url to the one provided by Teams when you create the webhook
