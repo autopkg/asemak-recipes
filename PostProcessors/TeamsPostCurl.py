@@ -103,8 +103,8 @@ class TeamsPost(Processor):
               curl_cmd.extend(curl_opts)
               # response_token = self.download_with_curl(curl_cmd)
 
-        except:
-            raise ProcessorError("Failed to acquire bearer authentication token!)
+            except:
+                raise ProcessorError("Failed to acquire bearer authentication token!)
 
 if __name__ == "__main__":
     processor = TeamsPostCurl()
