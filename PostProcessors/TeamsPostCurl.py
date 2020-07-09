@@ -92,7 +92,7 @@ class TeamsPostCurl(URLGetter):
             # Build the required curl switches
             curl_opts = [
                 # "--request", "POST",
-                "--data", {'text': teams_text, 'textformat': "markdown", 'title': "%s" % (emoji)},  # noqa
+                "--data", '{"text": teams_text, "textformat": "markdown", "title": "%s" % (emoji)}',  # noqa
                 self.env.get("webhook_url")
             ]
             
