@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
+import random
+
 from autopkglib import Processor, ProcessorError, URLGetter
 
 # Set the webhook_url to the one provided by Teams when you create the webhook
@@ -59,7 +62,13 @@ class TeamsPostCurl(URLGetter):
         was_imported = self.env.get("munki_repo_changed")
         munkiInfo = self.env.get("munki_info")
         webhook_url = self.env.get("webhook_url")
-        emoji = ":rocket:"
+        emojiList = ['&#x1F44A;', '&#x1F44C;', '&#x1F44D;', '&#x1F44F;',
+                     '&#x1F596;', '&#x1F590;', '&#x1F64C;', '&#x1F44B;',
+                     '&#x1F4AA;', '&#x1F525;', '&#x1F386;', '&#x1F9E8;',
+                     '&#x1F389;', '&#x1F381;', '&#x1F3C6;', '&#x1F91A;',
+                     '&#x270B;', '&#x270C;', '&#x1F91F;', '&#x1F918;',
+                     '&#x1F919;', '&#x270A;']
+        emoji = random.choice(emojiList)
 
         if was_imported:
             name = self.env.get("munki_importer_summary_result")[
@@ -78,8 +87,10 @@ class TeamsPostCurl(URLGetter):
                              **%s**  \nPkginfo Path: **%s**" % (
                              name, version, catalog, pkg_path,
                              pkginfo_path)
-                teams_data = {"text": {}, "textformat": "markdown",
-                              "title": "%s" % (emoji)}.format(teams_text)
+                teams_data = {'text': teams_text, 'textformat': "markdown",
+                              'title': "%s" % (emoji)}
+
+                json_data = json.dumps(teams_data)
 
             # Build the headers
             headers = {
@@ -90,20 +101,19 @@ class TeamsPostCurl(URLGetter):
             # Build the required curl switches
             curl_opts = [
                 # "--request", "POST",
-                "--data", teams_data.,  # noqa
+                "--data", json_data,
                 "{}".format(self.env.get("webhook_url"))
             ]
-            
+
             print ("Curl options are:", curl_opts)
-            
-            
+
             # Initialize the curl_cmd, add the curl options, and execute the curl  # noqa
-            curl_cmd = self.prepare_curl_cmd()
-            self.add_curl_headers(curl_cmd, headers)
-            curl_cmd.extend(curl_opts)
-            print ("Curl command is:", curl_cmd)
             try:
-                response = self.execute_curl(curl_cmd)
+                curl_cmd = self.prepare_curl_cmd()
+                self.add_curl_headers(curl_cmd, headers)
+                curl_cmd.extend(curl_opts)
+                print ("Curl command is:", curl_cmd)
+                response = self.download_with_curl(curl_cmd)
 
             except:
                 raise ProcessorError("Failed to complete the post")  # noqa
@@ -111,4 +121,3 @@ class TeamsPostCurl(URLGetter):
 if __name__ == "__main__":
     processor = TeamsPostCurl()
     processor.execute_shell()
-
