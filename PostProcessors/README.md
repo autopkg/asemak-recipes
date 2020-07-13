@@ -4,7 +4,7 @@
 
 A screenshot example can be found in this repo
 
-#### TeamsPosCurl.py has only been tested on AutoPkg version 2.1 as it removes the dependancy for the requests module and utilises URLGetter instead 
+#### TeamsPostCurl.py has only been tested on AutoPkg version 2.1 as it removes the dependancy for the requests module and utilises URLGetter instead 
 
 First you need to create a webhook in Teams: https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#add-an-incoming-webhook-to-a-teams-channel
 
