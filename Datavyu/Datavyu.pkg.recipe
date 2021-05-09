@@ -8,8 +8,6 @@
 	<string>com.asemak.recipes.pkg.datavyu</string>
 	<key>Input</key>
 	<dict>
-		<key>BUNDLE_ID</key>
-		<string>org.datavyu</string>
 		<key>NAME</key>
 		<string>datavyu</string>
 	</dict>
